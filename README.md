@@ -6,6 +6,7 @@ Projeto de Redes sem Fio
 Neste projeto a equipe deverá implementar as camadas físicas, de enlace e de rede de uma rede sem fio. O
 objetivo é criar uma simulação de rede sem fio onde pacotes saiam de uma origem e cheguem a um
 destino, não importando o número de nós intermediários.
+
 Especificação:
 
 • Na simulação devem existir obrigatoriamente as entidades roteador, pacote e hospedeiro (host).
