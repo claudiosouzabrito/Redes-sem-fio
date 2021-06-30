@@ -5,4 +5,10 @@ class Host:
         self.x = x
         self.y = y
         self.range = range
-        self.pacotes = []
+        self.pacote = []
+        self.entryBox = []
+        self.ready2send = 0
+        self.statusEnlace = 0
+        self.freeze = 0
+        self.rtsAlvo = -1
+        self.ctsAlvo = -1
