@@ -7,10 +7,10 @@ def indo(pacote, hostAlvoId):
 
 
 
-def vindo(pacote, hostChegada):
+def vindo(pacote, hostChegada, host):
     hostChegada.entryBox.append(pacote)
     if(pacote.indo == pacote.destino):
         pacote.status = 0 
     pacote.indo = -1
 
-    checagem(pacote, hostChegada)
+    checagem(pacote, hostChegada, host)

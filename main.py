@@ -53,74 +53,81 @@ while stillGoing:
     print("\tStatus:")
     for p in pacote:
         if(p.indo >= 0): #se no round anterior ele foi enviado por alguem
-            print("\t\tPacote " +str(p.id)+ " chegou no host " +str(p.indo))
-            vindo(p, host[p.indo])   
+            print("\t\tPacote " +str(p.message)+ " chegou no host " +str(p.indo))
+            vindo(p, host[p.indo], host)   
 
     for h in host:
         if(len(h.pacote) == 0):
             print("\t\tHost " +str(h.id)+ " não tem pacote nenhum para mandar")
         else:
+            print("\t\tHost " +str(h.id)+ " possui os seguintes pacotes para enviar: ")
             for p in h.pacote:
-                print("\t\tHost " +str(h.id)+ " possui os seguintes pacotes para enviar: ")
                 print("\t\t\t" + str(p.message))
 
     print("\tMovimentos: ")
     for h in host:
-        if(len(h.pacote) or h.statusEnlace >= 1):
-            if(h.ready2send):
-                if(h.freeze == 0):
-                    if(h.statusEnlace == 0):
+        if(len(h.pacote) or h.statusEnlace[0] >= 1):
+            if(h.ctsAlvo[0] > -1 and host[h.ctsAlvo[0]].freeze > 0):
+                h.freeze = 2
+            if(h.freeze <= 0):
+                if(h.ready2send):
+                    if(h.statusEnlace[0] == 0):
                         print("\t\tHost " +str(h.id)+ " envia RTS")
                         pack2send = h.pacote[0]
 
                         lista = copy.deepcopy(host)
-                        lista.pop(1)
+                        lista.pop(h.id)
                         for h2 in lista:
                             RTS= rts(h, h2, pack2send.destino, host) #REDES ENTRA AQUI
                             pacote.append(RTS) 
                             
-                    elif(h.statusEnlace == 1):
+                    elif(h.statusEnlace[0] == 1):
                         print("\t\tHost " +str(h.id)+ " envia CTS para confirmar reserva de canal")
 
                         lista = copy.deepcopy(host)
-                        lista.pop(2)
+                        lista.pop(h.id)
                         for h2 in lista:
                             CTS = cts(h, h2, host) #REDES ENTRA AQUI
                             pacote.append(CTS)
 
-                    elif(h.statusEnlace == 2):
-                        dados(h, h.rtsAlvo, h.pacote[0])
+                    elif(h.statusEnlace[0] == 2):
+                        dados(h, h.rtsAlvo[0], h.pacote[0])
                         pack2send = h.pacote.pop(0)
                         print("\t\tHost " +str(h.id)+ " envia pacote "+str(pack2send.id)+ " com destino a "+str(pack2send.destino))
 
-                    elif(h.statusEnlace == 3):
-                        print("\t\tHost " +str(h.id)+ " envia confirmacao de pacote ACK de volta para "+str(h.ctsAlvo))
-                        ack = ack(h)
-                        pacote.append(ack)
+                    elif(h.statusEnlace[0] == 3):
+                        print("\t\tHost " +str(h.id)+ " envia confirmacao de pacote ACK de volta para "+str(h.ctsAlvo[0]))
+                        ACK = ack(h)
+                        pacote.append(ACK)
+                        h.statusEnlace.pop(0)
 
                     else:
                         print("\t\tHost " +str(h.id)+ " em standby")
                 else:
-                    print("\t\tHost" +str(h.id)+ " esta congelado")
-                    h.freeze -= 1
+                    print("\t\tHost " +str(h.id)+ " quer enviar pacote")
+                    #ALGORITMO DE PROCURA DE VIZINHANÇA AQUI (REDES)
+                    h.ready2send = 1  #TEM Q ZERAR EM ALGUM MOMENTO
             else:
-                print("\t\tHost " +str(h.id)+ " quer enviar pacote")
-                #ALGORITMO DE PROCURA DE VIZINHANÇA AQUI
-                h.ready2send = 1
+                print("\t\tHost" +str(h.id)+ " esta congelado")
+                h.freeze -= 1
+                
         else:
             print("\t\tHost " +str(h.id)+ " nao tem nada para enviar")
 
-        if(len(h.entryBox)):
-            if(h.entryBox[0].destino == h.id):
-                print("\t\tpacote entrado em " +str(h.id)+ " foi o correto ")
-                h.entryBox.pop(0)
+        aux = 0
+        for p in h.entryBox:
+            if(p.destino == h.id):
+                print("\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " chegou ao destino final correto ")
+                h.entryBox.pop(aux)
             else:
-                print("\t\tpacote entrado em " +str(h.id)+ " tem outro destino ")
-                h.pacote.append(h.entryBox.pop(0))
+                print("\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " tem outro destino ")
+                pack = h.entryBox.pop(aux)
+                pack.origin = h.id
+                h.pacote.append(pack)
+            aux += 1
     
     stillGoing = 0
     for p in pacote:
-        print(p.message)
         stillGoing += p.status
         if(stillGoing > 0):
             break
