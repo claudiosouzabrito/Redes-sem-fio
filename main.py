@@ -43,10 +43,16 @@ for i in range(len(fileP)):
 
     host[jay["origin"]].pacote.append(pck)
 
+graph(x,y,ranges, nomes, numHost, dimension)
 stillGoing = 1
 round = 0
-graph(x,y,ranges, nomes, numHost, dimension, round)
+
 while stillGoing:
+    ctrl1 = 0
+    ctrl2 = 0
+    statusNewInserts = []
+    rtsNewInserts = []
+    ctsNewInserts = []
 
     print("\nRound "+str(round))
 
@@ -54,7 +60,7 @@ while stillGoing:
     for p in pacote:
         if(p.indo >= 0): #se no round anterior ele foi enviado por alguem
             print("\t\tPacote " +str(p.message)+ " chegou no host " +str(p.indo))
-            vindo(p, host[p.indo], host)   
+            vindo(p, host[p.indo], host, statusNewInserts)   
 
     for h in host:
         if(len(h.pacote) == 0):
@@ -67,18 +73,20 @@ while stillGoing:
     print("\tMovimentos: ")
     for h in host:
         if(len(h.pacote) or h.statusEnlace[0] >= 1):
-            if(h.ctsAlvo[0] > -1 and host[h.ctsAlvo[0]].freeze > 0):
+            if(h.ctsAlvo[0] > -1 and host[h.ctsAlvo[0]].freeze > 0 and h.statusEnlace[0] != 3):
                 h.freeze = 2
             if(h.freeze <= 0):
                 if(h.ready2send):
                     if(h.statusEnlace[0] == 0):
                         print("\t\tHost " +str(h.id)+ " envia RTS")
                         pack2send = h.pacote[0]
+                        h.statusEnlace.insert(0,-1)
+                        #statusNewInserts.append(tuple([h.id, -1]))
 
                         lista = copy.deepcopy(host)
                         lista.pop(h.id)
                         for h2 in lista:
-                            RTS= rts(h, h2, pack2send.destino, host) #REDES ENTRA AQUI
+                            RTS= rts(h, h2, pack2send.destino, host, ctsNewInserts) #REDES ENTRA AQUI
                             pacote.append(RTS) 
                             
                     elif(h.statusEnlace[0] == 1):
@@ -87,7 +95,7 @@ while stillGoing:
                         lista = copy.deepcopy(host)
                         lista.pop(h.id)
                         for h2 in lista:
-                            CTS = cts(h, h2, host) #REDES ENTRA AQUI
+                            CTS = cts(h, h2, host, rtsNewInserts) #REDES ENTRA AQUI
                             pacote.append(CTS)
 
                     elif(h.statusEnlace[0] == 2):
@@ -97,6 +105,7 @@ while stillGoing:
 
                     elif(h.statusEnlace[0] == 3):
                         print("\t\tHost " +str(h.id)+ " envia confirmacao de pacote ACK de volta para "+str(h.ctsAlvo[0]))
+                        #host[h.ctsAlvo[0]].statusEnlace[0] = 0  #liberando o alvo do CTS
                         ACK = ack(h)
                         pacote.append(ACK)
                         h.statusEnlace.pop(0)
@@ -125,12 +134,28 @@ while stillGoing:
                 pack.origin = h.id
                 h.pacote.append(pack)
             aux += 1
+
+    for t in statusNewInserts:
+        host[t[0]].statusEnlace.insert(0, t[1])
+    for t in rtsNewInserts:
+        host[t[0]].rtsAlvo.insert(0, t[1])
+    for t in ctsNewInserts:
+        host[t[0]].ctsAlvo.insert(0, t[1])
     
-    stillGoing = 0
     for p in pacote:
-        stillGoing += p.status
-        if(stillGoing > 0):
+        ctrl1 += p.status
+        if(ctrl1 > 0):
             break
+    for h in host:
+        if(len(h.statusEnlace) > 1):
+            ctrl2 = 1
+            break
+    if(ctrl1 or ctrl2):
+        stillGoing = 1
+    else:
+        stillGoing = 0
     
     round += 1
-
+    
+    if(round == 17):
+        break

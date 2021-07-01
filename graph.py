@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def graph(x,y,ranges,nomes, numHost, dimension, round):
+def graph(x,y,ranges,nomes, numHost, dimension):
     colors = np.random.rand(numHost)
 
     area = 1000 * np.array(ranges) * ((100/dimension)**2)
@@ -14,4 +14,4 @@ def graph(x,y,ranges,nomes, numHost, dimension, round):
     for i, txt in enumerate(nomes):
         plt.annotate(txt, (x[i], y[i]), ha='center', va='center')
         
-    plt.savefig('resultados/hospedeiros no planoT=' +str(round)+ '.png')
+    plt.savefig('resultados/hospedeiros no plano.png')
