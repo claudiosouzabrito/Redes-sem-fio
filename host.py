@@ -7,8 +7,10 @@ class Host:
         self.range = range
         self.pacote = []
         self.entryBox = []
-        self.ready2send = 0
-        self.statusEnlace = [0]
-        self.freeze = 0
-        self.rtsAlvo = [-1]
-        self.ctsAlvo = [-1]
+        self.ready2send = 1
+        self.statusEnlace = 0
+        self.block = 0
+        self.ackAlvo = []
+        self.ackWait = 0
+        self.surdo = False
+        self.pckAlvo = -1

@@ -1,46 +1,48 @@
 from pacote import Pacote
 from fisica import indo
 
-def rts(hostOrigin, hostsDestino, id, host, ctsNewInsert):
-    
 
-    if(hostsDestino.id == id):
-        rts = Pacote(-1, hostOrigin.id, hostsDestino.id, "RTS-1")
-        #host[id].ctsAlvo.insert(0, hostOrigin.id)
-        ctsNewInsert.append(tuple([id, hostOrigin.id]))
-        #print("host "+str(id)+ " entrando")
-        indo(hostOrigin, rts, hostsDestino.id)
-    else:
-        rts = Pacote(-1, hostOrigin.id, hostsDestino.id, "RTS-0")
-        indo(hostOrigin, rts, hostsDestino.id)
-    return rts
-
-def cts(hostOrigin, hostsDestino, host, rtsNewInsert):
-    hostOrigin.statusEnlace[0] = -1
-
-    if(hostsDestino.id == hostOrigin.ctsAlvo[0]):
-        cts = Pacote(-1, hostOrigin.id, hostsDestino.id, "CTS-1")
-        #host[hostsDestino.id].rtsAlvo.insert(0, hostOrigin.id) 
-        rtsNewInsert.append(tuple([hostsDestino.id, hostOrigin.id]))
-        indo(hostOrigin, cts, hostsDestino.id)
-    else:
-        cts = Pacote(-1, hostOrigin.id, hostsDestino.id, "CTS-0")
-        indo(hostOrigin, cts, hostsDestino.id)
-    return cts
-
-def dados(hostOrigin, hostDestino, pacote):
-    indo(hostOrigin, pacote, hostDestino)
-    hostOrigin.statusEnlace[0] = 0
-    hostOrigin.freeze = 2
-    hostOrigin.rtsAlvo.pop(0)
+def dados(hostOrigin, pacote, idDestino, host):
+    indo(pacote, idDestino)
+    hostOrigin.ackWait = 2
+    host[idDestino].ackAlvo.append(hostOrigin.id)
+    hostOrigin.statusEnlace = 1
+    hostOrigin.block = 1
+    hostOrigin.pckAlvo = idDestino
 
 def ack(hostOrigin):
-    hostOrigin.statusEnlace[0] = 0  #status conflitante???? sim
+    ack = Pacote(-1, hostOrigin.id, hostOrigin.ackAlvo[0], "ACK")
+    indo(ack, hostOrigin.ackAlvo[0])
+    hostOrigin.statusEnlace = 0  
 
-    ack = Pacote(-1, hostOrigin.id, hostOrigin.ctsAlvo[0], "ACK")
-    indo(hostOrigin, ack, hostOrigin.ctsAlvo[0])
-    hostOrigin.ctsAlvo.pop(0)
-    
     return ack
 
-    
+def enlace(h, block, host, pacote):
+    if(h.statusEnlace == 0):
+        pack2send = h.pacote[0]
+
+        if(block == 0):
+            #USAR ALGORITMO DE REDES PRA ACHAR O ALVO PRO TERCEIRO PARÂMETRO
+            dados(h, h.pacote[0], h.pacote[0].destino, host)
+            print("\t\tHost " +str(h.id)+ " envia pacote "+str(pack2send.message)+ " com destino a "+str(pack2send.destino))
+        else:
+            print("\t\tHost " +str(h.id)+ " quer enviar "+str(pack2send.message)+ " com destino a "+str(pack2send.destino)+ " mas canal bloqueado")
+        
+    elif(h.statusEnlace == 1):
+        if(h.ackWait == 0):
+            pack2send = h.pacote[0]
+            if(block ==0):
+                #USAR ALGORITMO DE REDES PRA ACHAR O ALVO PRO TERCEIRO PARÂMETRO
+                dados(h, h.pacote[0], h.pacote[0].destino, host)
+                print("\t\tHost " +str(h.id)+ " esperou o ack, mas nao recebeu nada, reenviando pacote "+str(pack2send.message)+ " com destino a "+str(pack2send.destino))
+            else:
+                print("\t\tHost " +str(h.id)+ " esperou o ack, mas nao recebeu nada, quer reenviar pacote "+str(pack2send.message)+ " com destino a "+str(pack2send.destino)+ " mas canal bloqueado")
+
+        else:
+            print("\t\tHost " +str(h.id)+ " esperando ack")
+            h.ackWait -= 1
+
+    elif(h.statusEnlace == 2):
+        print("\t\tHost " +str(h.id)+ " envia confirmacao de pacote ACK de volta para "+str(h.ackAlvo[0]))
+        ACK = ack(h)
+        pacote.append(ACK)

@@ -1,10 +1,11 @@
 import copy
-from enlaceOut import ack, cts, dados, rts
+from enlaceOut import enlace
 from graph import graph
 from host import Host 
 import json
 from pacote import Pacote
 from fisica import vindo
+from random import randrange
 
 print("Apresentando os hosts:")
 
@@ -50,19 +51,21 @@ round = 0
 while stillGoing:
     ctrl1 = 0
     ctrl2 = 0
-    statusNewInserts = []
-    rtsNewInserts = []
-    ctsNewInserts = []
+    block = 0
 
     print("\nRound "+str(round))
 
     print("\tStatus:")
     for p in pacote:
         if(p.indo >= 0): #se no round anterior ele foi enviado por alguem
-            print("\t\tPacote " +str(p.message)+ " chegou no host " +str(p.indo))
-            vindo(p, host[p.indo], host, statusNewInserts)   
-
+            if(host[p.indo].surdo):
+                print("\t\tPacote " +str(p.message)+ " enviado por "+str(p.origin)+" chegou no host " +str(p.indo)+ ", mas foi ignorado pois estava surdo")
+            else:
+                print("\t\tPacote " +str(p.message)+ " enviado por "+str(p.origin)+" chegou no host " +str(p.indo))
+                vindo(p, host[p.indo], host)   
+    print()
     for h in host:
+        print("\tHost "+str(h.id)+ " está em status = "+str(h.statusEnlace))
         if(len(h.pacote) == 0):
             print("\t\tHost " +str(h.id)+ " não tem pacote nenhum para mandar")
         else:
@@ -72,61 +75,25 @@ while stillGoing:
 
     print("\tMovimentos: ")
     for h in host:
-        if(len(h.pacote) or h.statusEnlace[0] >= 1):
-            if(h.ctsAlvo[0] > -1 and host[h.ctsAlvo[0]].freeze > 0 and h.statusEnlace[0] != 3):
-                h.freeze = 2
-            if(h.freeze <= 0):
-                if(h.ready2send):
-                    if(h.statusEnlace[0] == 0):
-                        print("\t\tHost " +str(h.id)+ " envia RTS")
-                        pack2send = h.pacote[0]
-                        h.statusEnlace.insert(0,-1)
-                        #statusNewInserts.append(tuple([h.id, -1]))
+        if(len(h.pacote) or h.statusEnlace == 2):
+            if(randrange(10) >= 2): #simulando falha de enlace
+                copia = copy.deepcopy(host)
+                copia.pop(h.id)
+                for h2 in copia:     #PROCURAR NOS VIZINHOS SE TEM ALGUEM BLOQUEANDO
+                    block += h2.block
+                enlace(h, block, host, pacote)
 
-                        lista = copy.deepcopy(host)
-                        lista.pop(h.id)
-                        for h2 in lista:
-                            RTS= rts(h, h2, pack2send.destino, host, ctsNewInserts) #REDES ENTRA AQUI
-                            pacote.append(RTS) 
-                            
-                    elif(h.statusEnlace[0] == 1):
-                        print("\t\tHost " +str(h.id)+ " envia CTS para confirmar reserva de canal")
-
-                        lista = copy.deepcopy(host)
-                        lista.pop(h.id)
-                        for h2 in lista:
-                            CTS = cts(h, h2, host, rtsNewInserts) #REDES ENTRA AQUI
-                            pacote.append(CTS)
-
-                    elif(h.statusEnlace[0] == 2):
-                        dados(h, h.rtsAlvo[0], h.pacote[0])
-                        pack2send = h.pacote.pop(0)
-                        print("\t\tHost " +str(h.id)+ " envia pacote "+str(pack2send.id)+ " com destino a "+str(pack2send.destino))
-
-                    elif(h.statusEnlace[0] == 3):
-                        print("\t\tHost " +str(h.id)+ " envia confirmacao de pacote ACK de volta para "+str(h.ctsAlvo[0]))
-                        #host[h.ctsAlvo[0]].statusEnlace[0] = 0  #liberando o alvo do CTS
-                        ACK = ack(h)
-                        pacote.append(ACK)
-                        h.statusEnlace.pop(0)
-
-                    else:
-                        print("\t\tHost " +str(h.id)+ " em standby")
-                else:
-                    print("\t\tHost " +str(h.id)+ " quer enviar pacote")
-                    #ALGORITMO DE PROCURA DE VIZINHANÇA AQUI (REDES)
-                    h.ready2send = 1  #TEM Q ZERAR EM ALGUM MOMENTO
             else:
-                print("\t\tHost" +str(h.id)+ " esta congelado")
-                h.freeze -= 1
-                
+                print("\t\tHost " +str(h.id)+ " falha de enlace, redescobrindo as rotas")
+                #ALGORITMO DE PROCURA DE VIZINHANÇA AQUI (REDES)
+            
         else:
             print("\t\tHost " +str(h.id)+ " nao tem nada para enviar")
 
         aux = 0
         for p in h.entryBox:
             if(p.destino == h.id):
-                print("\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " chegou ao destino final correto ")
+                #print("\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " chegou ao destino final correto ")
                 h.entryBox.pop(aux)
             else:
                 print("\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " tem outro destino ")
@@ -134,22 +101,18 @@ while stillGoing:
                 pack.origin = h.id
                 h.pacote.append(pack)
             aux += 1
-
-    for t in statusNewInserts:
-        host[t[0]].statusEnlace.insert(0, t[1])
-    for t in rtsNewInserts:
-        host[t[0]].rtsAlvo.insert(0, t[1])
-    for t in ctsNewInserts:
-        host[t[0]].ctsAlvo.insert(0, t[1])
     
     for p in pacote:
         ctrl1 += p.status
         if(ctrl1 > 0):
             break
     for h in host:
-        if(len(h.statusEnlace) > 1):
+        h.block = 0
+        h.surdo = False
+        print("\tHost "+str(h.id)+ " está em status = "+str(h.statusEnlace))
+        if(h.statusEnlace > 1):
             ctrl2 = 1
-            break
+
     if(ctrl1 or ctrl2):
         stillGoing = 1
     else:
