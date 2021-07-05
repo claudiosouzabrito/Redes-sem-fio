@@ -17,3 +17,4 @@ class Host:
         self.vizinho = []
         self.rotas = []
         self.oldIds = []
+        self.rrepWait = 0

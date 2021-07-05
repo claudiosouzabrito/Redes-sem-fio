@@ -1,4 +1,4 @@
-{"origin":1, "destino":2, "message":"1-2"}
-{"origin":0, "destino":3, "message":"0-3"}
-{"origin":0, "destino":1, "message":"0-1"}
-{"origin":2, "destino":0, "message":"2-0"}
+{"origin":1, "destino":2, "message":"algo 0"}
+{"origin":0, "destino":3, "message":"algo 1"}
+{"origin":0, "destino":1, "message":"algo 2"}
+{"origin":2, "destino":0, "message":"algo 3"}

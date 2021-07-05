@@ -2,12 +2,14 @@ from pacote import Pacote
 from fisica import indo
 
 
-def dados(hostOrigin, pacote, idDestino, host):   #função apra enviar qualquer coisa que não seja ack. Coloca a rede em bloqueio para evitar colisão, e ponhe o host em espera por ack
+def dados(hostOrigin, pacote, idDestino, host):   #função apra enviar qualquer coisa que não seja ack
+    print("\t\t\tHost "+str(hostOrigin.id)+" envia pacote: "+str(pacote.message)+" para "+str(pacote.destino))
     indo(pacote, idDestino)
-    hostOrigin.ackWait = 2
-    host[idDestino].ackAlvo = hostOrigin.id
+    hostOrigin.ackWait = 2            #ponhe o host em espera por ack
+    #print(str(hostOrigin.id)+" com ackWait indo para 2")
+    #host[idDestino].ackAlvo = hostOrigin.id
     hostOrigin.statusEnlace = 1
-    hostOrigin.block = 1
+    hostOrigin.block = 1               # Coloca a rede em bloqueio para evitar colisão
     hostOrigin.pckAlvo = idDestino
 
 def ack(hostOrigin):    #função para enviar ack, também bloqueia a rede
