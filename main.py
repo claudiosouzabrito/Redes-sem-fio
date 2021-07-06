@@ -99,7 +99,7 @@ while stillGoing:
     logging.info("\n")
     logging.info("\t\tMovimentos: ")
     for h in host:
-        if(len(h.pacote) or h.statusEnlace == 2):
+        if(len(h.pacote) or h.statusEnlace == 2): #se tiver pacote para mandar ou deve mandar ACK
             
             for i in h.vizinho:     #PROCURAR NOS VIZINHOS SE TEM ALGUEM BLOQUEANDO
                 block += host[i].block
@@ -122,8 +122,6 @@ while stillGoing:
                 
 
             else:
-                # if(len(host[1].pacote) > 0):
-                #     print(host[1].pacote[0].destino)
                 redes(h, pacote)  #enviar na rede
             
 

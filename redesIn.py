@@ -38,7 +38,7 @@ def rRequest(pacote, hostChegada, pacotes):
             
             logging.info("(REDES)\t\t\t\t\t\tRREQ do host "+str(pacote.message[5])+" chegou em um intermediario")
 
-            for idH in hostChegada.vizinho:   #recaminhando para os vizinhos
+            for idH in hostChegada.vizinho:   #reencaminhando para os vizinhos
                 if(idH not in pacote.oldIds):   #caso ja não tenha passado por esses hosts 
                     logging.info("(REDES)\t\t\t\t\t\t\tRREQ futuramente encaminhado para host "+str(idH))
                     rreq = Pacote(pacote.id, hostChegada.id, idH, message)

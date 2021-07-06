@@ -98,29 +98,29 @@ def redes(h, pacotes):
             
     if(h.statusEnlace == 0):  #estado de envio, ou resolvido
 
-        if(h.rrepWait == 1):
+        if(h.rrepWait == 1):  #se ele esta esperando reply
             logging.info("(REDES)\t\t\tHost " +str(h.id)+ " esta esperando reply")
             for i in range(len(h.pacote)):
-                if(h.pacote[i].message[:4] == 'RREQ' or h.pacote[i].message[:4] == 'RREP'):
+                if(h.pacote[i].message[:4] == 'RREQ' or h.pacote[i].message[:4] == 'RREP'):  #se é um rreq ou rrep
                     pack2send = h.pacote[i]
                     logging.info("(REDES)\t\t\t\t mas repassou "+str(pack2send.message))
                     dados(h, pack2send, pack2send.destino)
                     break
         else:
             pack2send = h.pacote[0]
-            #logging.info("\tdestino: "+str(pack2send.destino))
-            if(pack2send.jaClonado == 1):
+
+            if(pack2send.jaClonado == 1):     #se pacote ja foi "clonado"
                 logging.info("(REDES)\t\t\tHost " +str(h.id)+ " proximo pacote ja foi disparado na rede, nao precisa clonar de novo")
                 dados(h, pack2send, pack2send.destino)
             else:
-                if(pack2send.destino in h.vizinho):    #esse é igual
+                if(pack2send.destino in h.vizinho):    #se for meu vizinho
                     logging.info("(REDES)\t\t\tHost " +str(h.id)+ " planeja enviar pacote "+str(pack2send.message)+ " para seus vizinhos")
                     broadcast(False, h, pack2send.destino, pacotes)  
                 else:
-                    if(len(h.rotas[pack2send.destino]) > 0 and (not request)):   #a esse
+                    if(len(h.rotas[pack2send.destino]) > 0 and (not request)):   #apos ja ter recebido o RREP e nao deu falha de enlace
                         logging.info("(REDES)\t\t\tHost " +str(h.id)+ " quer fazer chegar ate host "+str(pack2send.destino)+" mas nao eh vizinho")
                         broadcast(False, h, pack2send.destino, pacotes)  
-                    elif(len(h.rotas[pack2send.destino]) > 0 and request):
+                    elif(len(h.rotas[pack2send.destino]) > 0 and request):   #apos ja ter recebido RREP e deu falha de enlace
                         logging.info("(REDES)\t\t\tHost " +str(h.id)+ " perdeu rota ate host "+str(pack2send.destino)+" por causa do erro de enlace, portanto, RREQ")
                         h.rotas[pack2send.destino] = []
                         broadcast(True, h, pack2send.destino, pacotes)  

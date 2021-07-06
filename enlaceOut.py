@@ -3,13 +3,12 @@ from pacote import Pacote
 from fisica import indo
 
 
-def dados(hostOrigin, pacote, idDestino):   #função apra enviar qualquer coisa que não seja ack
+def dados(hostOrigin, pacote, idDestino):   #função para enviar qualquer coisa que não seja ack
     logging.info("(ENLACE)\t\t\t\t\tPrepara para enviar pacote: "+str(pacote.message)+" para host "+str(pacote.destino))
     indo(pacote, idDestino)
     hostOrigin.ackWait = 2            #poe o host em espera por ack
     logging.info("(ENLACE)\t\t\t\t\tEntra em modo de espera ack")
-    #print(str(hostOrigin.id)+" com ackWait indo para 2")
-    #host[idDestino].ackAlvo = hostOrigin.id
+    
     hostOrigin.statusEnlace = 1
     hostOrigin.block = 1               # Coloca a rede em bloqueio para evitar colisão
     logging.info("(ENLACE)\t\t\t\t\tBloqueia o canal para seus vizinhos")
