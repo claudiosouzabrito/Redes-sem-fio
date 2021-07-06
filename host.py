@@ -18,3 +18,4 @@ class Host:
         self.rotas = []
         self.oldIds = []
         self.rrepWait = 0
+        self.incapacitado = 0

@@ -1,0 +1,1584 @@
+INFO - 	Apresentando os hosts:
+INFO - 		id: 0, x: 10, y: 20, range: 30
+INFO - 		id: 1, x: 10, y: 58, range: 30
+INFO - 		id: 2, x: 15, y: 70, range: 30
+INFO - 		id: 3, x: 30, y: 41, range: 30
+INFO - 	Apresentando os pacotes:
+INFO - 		id: 0, origin: 1, destino: 2, mensagem: 1-2/<mensagem>
+INFO - 		id: 1, origin: 0, destino: 3, mensagem: 0-3/<mensagem>
+INFO - 		id: 2, origin: 0, destino: 1, mensagem: 0-1/<mensagem>
+INFO - 		id: 3, origin: 2, destino: 0, mensagem: 2-0/<mensagem>
+INFO - 
+
+INFO - 	Round 0
+INFO - 		Recebimentos:
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-3/<mensagem>
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 nao tem pacote nenhum para mandar
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 planeja enviar pacote 0-3/<mensagem> para seus vizinhos
+INFO - (REDES)				Criando copia do pacote 0-3/<mensagem> para 3
+INFO - (ENLACE)					Prepara para enviar pacote: 0-3/<mensagem> para host 3
+INFO - (FISICA)						Enviando pacote 0-3/<mensagem> para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 planeja enviar pacote 1-2/<mensagem> para seus vizinhos
+INFO - (REDES)				Criando copia do pacote 1-2/<mensagem> para 2
+INFO - (REDES)				Criando copia do pacote 1-2/<mensagem> para 3
+INFO - (ENLACE)					Prepara para enviar pacote: 1-2/<mensagem> para host 3
+INFO - (FISICA)						Enviando pacote 1-2/<mensagem> para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 quer enviar 2-0/<mensagem> com destino a 0 mas canal bloqueado
+INFO - 					Host 3 nao tem nada para enviar
+INFO - 
+
+INFO - 	Round 1
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 0-3/<mensagem> enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote chegou no destinatario final
+INFO - 					Pacote 1-2/<mensagem> enviado por 1 chegou no host 3, mas foi ignorado pois estava surdo (colisao)
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-3/<mensagem>
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 nao tem pacote nenhum para mandar
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 nao tem rota, portanto, RREQ
+INFO - (REDES)				Criando rreq para host 1
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:2-0:2 para host 1
+INFO - (FISICA)						Enviando pacote RREQ:2-0:2 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 0
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 0
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 2
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:2-0:2 enviado por host 2 chegou no host 1
+INFO - (ENLACE)					Mas foi bloqueado pois o mesmo estava esperando um ACK
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 nao tem pacote nenhum para mandar
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 nao tem rota, portanto, RREQ
+INFO - (REDES)				Criando rreq para host 3
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:0-1:0 para host 3
+INFO - (FISICA)						Enviando pacote RREQ:0-1:0 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 esperando ack
+INFO - 					Host 3 nao tem nada para enviar
+INFO - 
+
+INFO - 	Round 3
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:0-1:0 enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 3 ja tem caminho para [3, 0]
+INFO - (REDES)						RREQ do host 0 chegou em um intermediario
+INFO - (REDES)							RREQ futuramente encaminhado para host 1
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - (REDES)			Host 1 esperou ack e nao recebeu, planeja reenviar pacote para host 3, pois eh vizinho
+INFO - (ENLACE)					Prepara para enviar pacote: 1-2/<mensagem> para host 3
+INFO - (FISICA)						Enviando pacote 1-2/<mensagem> para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta esperando ack, canal bloqueado
+INFO - 					Host 3 quer enviar ack com destino a 0 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 4
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 1-2/<mensagem> enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote 1-2/<mensagem> sera ignorado pelo host pois nao faz parte da rota
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 esperou ack e nao recebeu, planeja reenviar pacote para host 1, pois eh vizinho
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:2-0:2 para host 1
+INFO - (FISICA)						Enviando pacote RREQ:2-0:2 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 5
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:2-0:2 enviado por host 2 chegou no host 1
+INFO - (ENLACE)					Mas foi bloqueado pois o mesmo estava esperando um ACK
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperou ack e nao recebeu, planeja reenviar pacote para host 3, pois eh vizinho
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:0-1:0 para host 3
+INFO - (FISICA)						Enviando pacote RREQ:0-1:0 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 proximo pacote ja foi disparado na rede, nao precisa clonar de novo
+INFO - (ENLACE)					Prepara para enviar pacote: 1-2/<mensagem> para host 2
+INFO - (FISICA)						Enviando pacote 1-2/<mensagem> para host 2
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta esperando ack, canal bloqueado
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 6
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 1-2/<mensagem> enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote chegou no destinatario final
+INFO - (FISICA)			Pacote RREQ:0-1:0 enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 3 ja tem caminho para [3, 0]
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				1-2/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 0
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 0
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 7
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - (REDES)				 mas repassou RREQ:2-0:2
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:2-0:2 para host 1
+INFO - (FISICA)						Enviando pacote RREQ:2-0:2 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar pacote RREQ:0-1:0,3 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:0-1:0,3 para host 1
+INFO - (FISICA)						Enviando pacote RREQ:0-1:0,3 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 8
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:2-0:2 enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 1 ja tem caminho para [1, 2]
+INFO - (REDES)						RREQ do host 2 chegou em um intermediario
+INFO - (REDES)							RREQ futuramente encaminhado para host 3
+INFO - 					Pacote RREQ:0-1:0,3 enviado por 3 chegou no host 1, mas foi ignorado pois estava surdo (colisao)
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2,1
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 2
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 2
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta esperando ack, canal bloqueado
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 9
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2,1
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar pacote RREQ:2-0:2,1 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:2-0:2,1 para host 3
+INFO - (FISICA)						Enviando pacote RREQ:2-0:2,1 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta a espera de reply, canal bloqueado
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 10
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:2-0:2,1 enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Adicionando o caminho inverso: ['2', '1', '3'] no host 3
+INFO - (REDES)						RREQ do host 2 chegou em um intermediario
+INFO - (REDES)							RREQ futuramente encaminhado para host 0
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2,1
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2,1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 11
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2,1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - (REDES)			Host 3 planeja enviar pacote RREQ:2-0:2,1,3 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:2-0:2,1,3 para host 0
+INFO - (FISICA)						Enviando pacote RREQ:2-0:2,1,3 para host 0
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 12
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:2-0:2,1,3 enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Adicionando o caminho inverso: ['2', '1', '3', '0'] no host 0
+INFO - (REDES)						RREQ do host 2 chegou no host 0, destinatario final. Criando RREP para vizinhos
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:2-0:2,1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 13
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)				 mas repassou RREP:0-2:2,1,3,0
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-2:2,1,3,0 para host 3
+INFO - (FISICA)						Enviando pacote RREP:0-2:2,1,3,0 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 14
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-2:2,1,3,0 enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP do host 0 chegou em um host que nao eh o alvo final do pacote
+INFO - (REDES)							RREP futuramente encaminhado para host 1
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 0
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 0
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 15
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 esta esperando reply
+INFO - (REDES)			Host 3 planeja enviar pacote RREP:0-2:2,1,3,0 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-2:2,1,3,0 para host 1
+INFO - (FISICA)						Enviando pacote RREP:0-2:2,1,3,0 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 16
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-2:2,1,3,0 enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP do host 0 chegou em um host que nao eh o alvo final do pacote
+INFO - (REDES)							RREP futuramente encaminhado para host 2
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta a espera de reply, canal bloqueado
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 17
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar pacote RREP:0-2:2,1,3,0 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-2:2,1,3,0 para host 2
+INFO - (FISICA)						Enviando pacote RREP:0-2:2,1,3,0 para host 2
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta a espera de reply, canal bloqueado
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 18
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-2:2,1,3,0 enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP chegou no destinatario final
+INFO - (REDES)							Adicionando o caminho: [2, 1, 3, 0] no host 2
+INFO - (REDES)							Adicionando o caminho: [2, 1, 3] no host 2
+INFO - (REDES)							Adicionando o caminho: [2, 1] no host 2
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-2:2,1,3,0
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar pacote RREQ:0-1:0,3 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:0-1:0,3 para host 1
+INFO - (FISICA)						Enviando pacote RREQ:0-1:0,3 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 19
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:0-1:0,3 enviado por host 3 chegou no host 1
+INFO - (ENLACE)					Mas foi bloqueado pois o mesmo estava esperando um ACK
+INFO - (FISICA)			Pacote ACK enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - 					Host 1 nao tem nada para enviar
+INFO - (REDES)			Host 2 quer fazer chegar ate host 0 mas nao eh vizinho
+INFO - (REDES)				Criando copia do pacote 2-0/<mensagem> para 1
+INFO - (ENLACE)					Prepara para enviar pacote: 2-0/<mensagem> para host 1
+INFO - (FISICA)						Enviando pacote 2-0/<mensagem> para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 esperando ack
+INFO - 
+
+INFO - 	Round 20
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 2-0/<mensagem> enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote 2-0/<mensagem> chegou em um intermediario
+INFO - (REDES)						Pacote futuramente encaminhado para os vizinhos
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 2
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 2
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 esta esperando ack, canal bloqueado
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 21
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 nao tem rota, portanto, RREQ
+INFO - (REDES)				Criando rreq para host 2
+INFO - (REDES)				Criando rreq para host 3
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:1-0:1 para host 3
+INFO - (FISICA)						Enviando pacote RREQ:1-0:1 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esperou o ack, mas nao recebeu nada, quer reenviar pacote RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 22
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:1-0:1 enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 3 ja tem caminho para [3, 1]
+INFO - (REDES)						RREQ do host 1 chegou em um intermediario
+INFO - (REDES)							RREQ futuramente encaminhado para host 0
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1
+INFO - 				RREQ:1-0:1
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 23
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - (REDES)				 mas repassou RREQ:1-0:1
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:1-0:1 para host 2
+INFO - (FISICA)						Enviando pacote RREQ:1-0:1 para host 2
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREQ:1-0:1,3 com destino a 0 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 24
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:1-0:1 enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 2 ja tem caminho para [2, 1]
+INFO - (REDES)						RREQ do host 1 chegou em um intermediario
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar pacote RREQ:1-0:1,3 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:1-0:1,3 para host 0
+INFO - (FISICA)						Enviando pacote RREQ:1-0:1,3 para host 0
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 25
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:1-0:1,3 enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Adicionando o caminho inverso: ['1', '3', '0'] no host 0
+INFO - (REDES)						RREQ do host 1 chegou no host 0, destinatario final. Criando RREP para vizinhos
+INFO - (FISICA)			Pacote ACK enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 26
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)				 mas repassou RREP:0-1:1,3,0
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-1:1,3,0 para host 3
+INFO - (FISICA)						Enviando pacote RREP:0-1:1,3,0 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 27
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-1:1,3,0 enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP do host 0 chegou em um host que nao eh o alvo final do pacote
+INFO - (REDES)							RREP futuramente encaminhado para host 1
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 0
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 0
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 28
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar pacote RREP:0-1:1,3,0 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-1:1,3,0 para host 1
+INFO - (FISICA)						Enviando pacote RREP:0-1:1,3,0 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 29
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-1:1,3,0 enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP chegou no destinatario final
+INFO - (REDES)							Adicionando o caminho: [1, 3, 0] no host 1
+INFO - (REDES)							Adicionando o caminho: [1, 3] no host 1
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 30
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 perdeu rota ate host 0 por causa do erro de enlace, portanto, RREQ
+INFO - (REDES)				Criando rreq para host 2
+INFO - (REDES)				Criando rreq para host 3
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:1-0:1 para host 3
+INFO - (FISICA)						Enviando pacote RREQ:1-0:1 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 31
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:1-0:1 enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 3 ja tem caminho para [3, 1]
+INFO - (REDES)						RREQ do host 1 chegou em um intermediario
+INFO - (REDES)							RREQ futuramente encaminhado para host 0
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1
+INFO - 				RREQ:1-0:1
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 32
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - (REDES)				 mas repassou RREQ:1-0:1
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:1-0:1 para host 2
+INFO - (FISICA)						Enviando pacote RREQ:1-0:1 para host 2
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREQ:1-0:1,3 com destino a 0 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 33
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:1-0:1 enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 2 ja tem caminho para [2, 1]
+INFO - (REDES)						RREQ do host 1 chegou em um intermediario
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar pacote RREQ:1-0:1,3 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:1-0:1,3 para host 0
+INFO - (FISICA)						Enviando pacote RREQ:1-0:1,3 para host 0
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 34
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:1-0:1,3 enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 0 ja tem caminho para [0, 3, 1]
+INFO - (REDES)						RREQ do host 1 chegou no host 0, destinatario final. Criando RREP para vizinhos
+INFO - (FISICA)			Pacote ACK enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:1-0:1,3
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 35
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)				 mas repassou RREP:0-1:1,3,0
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-1:1,3,0 para host 3
+INFO - (FISICA)						Enviando pacote RREP:0-1:1,3,0 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 36
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-1:1,3,0 enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP do host 0 chegou em um host que nao eh o alvo final do pacote
+INFO - (REDES)							RREP futuramente encaminhado para host 1
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 0
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 0
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 37
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esta esperando reply
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar pacote RREP:0-1:1,3,0 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:0-1:1,3,0 para host 1
+INFO - (FISICA)						Enviando pacote RREP:0-1:1,3,0 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 38
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:0-1:1,3,0 enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP chegou no destinatario final
+INFO - (REDES)							Adicionando o caminho: [1, 3, 0] no host 1
+INFO - (REDES)							Adicionando o caminho: [1, 3] no host 1
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:0-1:1,3,0
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 39
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 quer fazer chegar ate host 0 mas nao eh vizinho
+INFO - (REDES)				Criando copia do pacote 2-0/<mensagem> para 3
+INFO - (ENLACE)					Prepara para enviar pacote: 2-0/<mensagem> para host 3
+INFO - (FISICA)						Enviando pacote 2-0/<mensagem> para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREQ:0-1:0,3 com destino a 1 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 40
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 2-0/<mensagem> enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote 2-0/<mensagem> chegou em um intermediario
+INFO - (REDES)						Pacote futuramente encaminhado para os vizinhos
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 41
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar pacote RREQ:0-1:0,3 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREQ:0-1:0,3 para host 1
+INFO - (FISICA)						Enviando pacote RREQ:0-1:0,3 para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 42
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREQ:0-1:0,3 enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Host 1 ja tem caminho para [1, 3, 0]
+INFO - (REDES)						RREQ do host 0 chegou no host 1, destinatario final. Criando RREP para vizinhos
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				RREP:1-0:0,3,1
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREQ:0-1:0,3
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 43
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				RREP:1-0:0,3,1
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar pacote RREP:1-0:0,3,1 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:1-0:0,3,1 para host 3
+INFO - (FISICA)						Enviando pacote RREP:1-0:0,3,1 para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar 2-0/<mensagem> com destino a 0 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 44
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:1-0:0,3,1 enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP do host 1 chegou em um host que nao eh o alvo final do pacote
+INFO - (REDES)							RREP futuramente encaminhado para host 0
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				RREP:1-0:0,3,1
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 45
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 planeja enviar pacote RREP:1-0:0,3,1 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:1-0:0,3,1 para host 2
+INFO - (FISICA)						Enviando pacote RREP:1-0:0,3,1 para host 2
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar RREP:1-0:0,3,1 com destino a 0 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 46
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:1-0:0,3,1 enviado por host 1 chegou no host 2
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP do host 1 chegou em um host que nao eh o alvo final do pacote
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esta esperando reply
+INFO - (REDES)			Host 1 esperando ack
+INFO - (REDES)			Host 2 planeja enviar confirmacao de pacote ACK de volta para host 1
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 1
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - (REDES)			Host 3 planeja enviar pacote RREP:1-0:0,3,1 para seus vizinhos
+INFO - (ENLACE)					Prepara para enviar pacote: RREP:1-0:0,3,1 para host 0
+INFO - (FISICA)						Enviando pacote RREP:1-0:0,3,1 para host 0
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 47
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote RREP:1-0:0,3,1 enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						RREP chegou no destinatario final
+INFO - (REDES)							Adicionando o caminho: [0, 3, 1] no host 0
+INFO - (REDES)							Adicionando o caminho: [0, 3] no host 0
+INFO - (FISICA)			Pacote ACK enviado por host 2 chegou no host 1
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				RREP:1-0:0,3,1
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 48
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 quer fazer chegar ate host 1 mas nao eh vizinho
+INFO - (REDES)				Criando copia do pacote 0-1/<mensagem> para 3
+INFO - (ENLACE)					Prepara para enviar pacote: 0-1/<mensagem> para host 3
+INFO - (FISICA)						Enviando pacote 0-1/<mensagem> para host 3
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 quer enviar 2-0/<mensagem> com destino a 0 mas canal bloqueado
+INFO - 
+
+INFO - 	Round 49
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 0-1/<mensagem> enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote 0-1/<mensagem> chegou em um intermediario
+INFO - (REDES)						Pacote futuramente encaminhado para os vizinhos
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 				0-1/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 esperando ack
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar confirmacao de pacote ACK de volta para host 0
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 0
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 50
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 nao tem pacote nenhum para mandar
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 				0-1/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - 					Host 0 nao tem nada para enviar
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar pacote 2-0/<mensagem> para seus vizinhos
+INFO - (REDES)				Criando copia do pacote 2-0/<mensagem> para 0
+INFO - (ENLACE)					Prepara para enviar pacote: 2-0/<mensagem> para host 0
+INFO - (FISICA)						Enviando pacote 2-0/<mensagem> para host 0
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 51
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 2-0/<mensagem> enviado por host 3 chegou no host 0
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote chegou no destinatario final
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 nao tem pacote nenhum para mandar
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				2-0/<mensagem>
+INFO - 				0-1/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - (REDES)			Host 0 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 52
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 0 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 nao tem pacote nenhum para mandar
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - 					Host 0 nao tem nada para enviar
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - (REDES)			Host 3 planeja enviar pacote 0-1/<mensagem> para seus vizinhos
+INFO - (REDES)				Criando copia do pacote 0-1/<mensagem> para 1
+INFO - (ENLACE)					Prepara para enviar pacote: 0-1/<mensagem> para host 1
+INFO - (FISICA)						Enviando pacote 0-1/<mensagem> para host 1
+INFO - (ENLACE)					Entra em modo de espera ack
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 
+
+INFO - 	Round 53
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote 0-1/<mensagem> enviado por host 3 chegou no host 1
+INFO - (ENLACE)				Host entrando em modo de ACK
+INFO - (ENLACE)				Incapaz de receber qualquer outro pacote esse round
+INFO - (REDES)						Pacote chegou no destinatario final
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 nao tem pacote nenhum para mandar
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 possui os seguintes pacotes para enviar: 
+INFO - 				0-1/<mensagem>
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - 					Host 0 nao tem nada para enviar
+INFO - (REDES)			Host 1 planeja enviar confirmacao de pacote ACK de volta para host 3
+INFO - (ENLACE)					Prepara para enviar pacote ack
+INFO - (FISICA)						Enviando pacote ACK para host 3
+INFO - (ENLACE)					Bloqueia o canal para seus vizinhos
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 esta esperando ack, canal bloqueado
+INFO - 
+
+INFO - 	Round 54
+INFO - 		Recebimentos:
+INFO - (FISICA)			Pacote ACK enviado por host 1 chegou no host 3
+INFO - (ENLACE)				Ack recebido, eliminando pacote do topo da lista
+INFO - 		Filas de pacotes nos hosts:
+INFO - 			Host 0 nao tem pacote nenhum para mandar
+INFO - 			Host 1 nao tem pacote nenhum para mandar
+INFO - 			Host 2 nao tem pacote nenhum para mandar
+INFO - 			Host 3 nao tem pacote nenhum para mandar
+INFO - 
+
+INFO - 		Movimentos: 
+INFO - 					Host 0 nao tem nada para enviar
+INFO - 					Host 1 nao tem nada para enviar
+INFO - 					Host 2 nao tem nada para enviar
+INFO - 					Host 3 nao tem nada para enviar

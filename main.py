@@ -4,8 +4,12 @@ from host import Host
 import json
 from pacote import Pacote
 from fisica import vindo
+import logging
 
-print("Apresentando os hosts:")
+logging.basicConfig(filename='resultados/descricao.log', filemode='w', format='%(levelname)s - %(message)s')
+logging.getLogger().setLevel(logging.INFO)
+
+logging.info("\tApresentando os hosts:")
 
 fileH = open('entradas/hospedeiros.txt', 'r' ).readlines()
 dimensions = fileH[0].split()
@@ -26,10 +30,10 @@ for i in range(2, len(fileH)):
     nomes.append('host' + str(i-2))
 
     hos = Host(i-2, jay["x"], jay["y"], jay["range"])
-    print('\tid: ' + str(hos.id) + ', x: ' + str(hos.x) + ', y: ' + str(hos.y) + ', range: ' + str(hos.range))
+    logging.info('\t\tid: ' + str(hos.id) + ', x: ' + str(hos.x) + ', y: ' + str(hos.y) + ', range: ' + str(hos.range))
     host.append(hos)
 
-print("Apresentando os pacotes:")
+logging.info("\tApresentando os pacotes:")
 
 pacote = []
 
@@ -40,7 +44,7 @@ for i in range(len(fileP)):
     pck.message = str(pck.origin)+ "-"+ str(pck.destino)+'/'+pck.message
     pck.oldIds.append(pck.origin)
 
-    print('\t\tid: ' +str(i)+ ', origin: ' + str(pck.origin) + ', destino: ' + str(pck.destino) + ', mensagem: ' + str(pck.message))
+    logging.info('\t\tid: ' +str(i)+ ', origin: ' + str(pck.origin) + ', destino: ' + str(pck.destino) + ', mensagem: ' + str(pck.message))
     pacote.append(pck)
 
     host[jay["origin"]].pacote.append(pck)
@@ -67,31 +71,33 @@ while stillGoing:
     ctrl2 = 0
     block = 0
 
-    print("\nRound "+str(round))
+    logging.info("\n")
+    logging.info("\tRound "+str(round))
 
-    print("\tStatus:")
+    logging.info("\t\tRecebimentos:")
     for p in pacote:
         if(p.indo >= 0): #se no round anterior ele foi enviado por alguem
             if(host[p.indo].surdo):
-                print("\t\tPacote " +str(p.message)+ " enviado por "+str(p.origin)+" chegou no host " +str(p.indo)+ ", mas foi ignorado pois estava surdo")
+                logging.info("\t\t\t\t\tPacote " +str(p.message)+ " enviado por "+str(p.origin)+" chegou no host " +str(p.indo)+ ", mas foi ignorado pois estava surdo (colisao)")
                 p.indo = -1
             else:
-                print("\t\tPacote " +str(p.message)+ " enviado por "+str(p.origin)+" chegou no host " +str(p.indo))
                 vindo(p, host[p.indo], host, pacote)   
     print()
+    logging.info("\t\tFilas de pacotes nos hosts:")
     for h in host:
-        print("\tHost "+str(h.id)+ " está em status = "+str(h.statusEnlace))
+        
         if(len(h.pacote) == 0):
-            print("\t\tHost " +str(h.id)+ " não tem pacote nenhum para mandar")
+            logging.info("\t\t\tHost " +str(h.id)+ " nao tem pacote nenhum para mandar")
         else:
-            print("\t\tHost " +str(h.id)+ " possui os seguintes pacotes para enviar: ")
+            logging.info("\t\t\tHost " +str(h.id)+ " possui os seguintes pacotes para enviar: ")
             for p in h.pacote:
                 if(p.indo == -1):
-                    print("\t\t\t" + str(p.message))
+                    logging.info("\t\t\t\t" + str(p.message))
                 else:
-                    print("\t\t\t" + str(p.message)+" ja enviado")
+                    logging.info("\t\t\t\t" + str(p.message)+" ja enviado")
 
-    print("\tMovimentos: ")
+    logging.info("\n")
+    logging.info("\t\tMovimentos: ")
     for h in host:
         if(len(h.pacote) or h.statusEnlace == 2):
             
@@ -101,38 +107,38 @@ while stillGoing:
                 if(h.statusEnlace == 0):
                     pack2send = h.pacote[0]
                     if(h.rrepWait == 1):
-                        print("\t\tHost " +str(h.id)+ " esta a espera de reply, canal bloqueado")
+                        logging.info("\t\t\t\t\tHost " +str(h.id)+ " esta a espera de reply, canal bloqueado")
                     else:
-                        print("\t\tHost " +str(h.id)+ " quer enviar "+str(pack2send.message)+ " com destino a "+str(pack2send.destino)+ " mas canal bloqueado")
+                        logging.info("\t\t\t\t\tHost " +str(h.id)+ " quer enviar "+str(pack2send.message)+ " com destino a "+str(pack2send.destino)+ " mas canal bloqueado")
                 elif(h.statusEnlace == 1):
                     pack2send = h.pacote[0]
                     if(h.ackWait == 0):
-                        print("\t\tHost " +str(h.id)+ " esperou o ack, mas nao recebeu nada, quer reenviar pacote "+str(pack2send.message)+ " com destino a "+str(pack2send.destino)+ " mas canal bloqueado")
+                        logging.info("\t\t\t\t\tHost " +str(h.id)+ " esperou o ack, mas nao recebeu nada, quer reenviar pacote "+str(pack2send.message)+ " com destino a "+str(pack2send.destino)+ " mas canal bloqueado")
                     else:
                         h.ackWait -= 1
-                        print("\t\tHost " +str(h.id)+ " esta esperando ack, canal bloqueado")
+                        logging.info("\t\t\t\t\tHost " +str(h.id)+ " esta esperando ack, canal bloqueado")
                 elif(h.statusEnlace == 2):
-                    print("\t\tHost " +str(h.id)+ " quer enviar ack com destino a "+str(h.ackAlvo)+ " mas canal bloqueado")
+                    logging.info("\t\t\t\t\tHost " +str(h.id)+ " quer enviar ack com destino a "+str(h.ackAlvo)+ " mas canal bloqueado")
                 
 
             else:
                 # if(len(host[1].pacote) > 0):
                 #     print(host[1].pacote[0].destino)
-                redes(h, block, host, pacote)  #enviar na rede
+                redes(h, pacote)  #enviar na rede
             
 
 
         else:
-            print("\t\tHost " +str(h.id)+ " nao tem nada para enviar")
+            logging.info("\t\t\t\t\tHost " +str(h.id)+ " nao tem nada para enviar")
 
 
         aux = 0
         for p in h.entryBox:
             if(p.status == 0):
-                #print("\t\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " chegou ao destino final correto ")
+                #logging.info("\t\t\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " chegou ao destino final correto ")
                 h.entryBox.pop(aux)  #pacote resolvido
             # else:
-                # print("\t\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " tem outro destino: "+str(p.destino))
+                # logging.info("\t\t\t\tpacote " + str(p.message)+ " entrado em " +str(h.id)+ " tem outro destino: "+str(p.destino))
                 # pack = h.entryBox.pop(aux)
                 # pack.origin = h.id
                 # h.pacote.append(pack)  #pacote enviado para a lista de pacotes do host
@@ -145,8 +151,8 @@ while stillGoing:
     for h in host:
         h.block = 0
         h.surdo = False
-        print("\tHost "+str(h.id)+ " está em status = "+str(h.statusEnlace))
-        if(h.statusEnlace > 1):
+        #logging.info("\t\tHost "+str(h.id)+ " está em status = "+str(h.statusEnlace))
+        if(h.statusEnlace > 0):
             ctrl2 = 1
 
     if(ctrl1 or ctrl2):
